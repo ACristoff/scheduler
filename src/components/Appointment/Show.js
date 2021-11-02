@@ -28,7 +28,6 @@ function Show(props) {
         </section>
       </section>
     </main>
-
   )
 }
 
