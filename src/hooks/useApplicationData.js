@@ -12,48 +12,21 @@ function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
-  // function updateSpots2(id, updateUp) {
-  //   for (const day in state.days) {
-  //     const foundDay = state.days[day].appointments.find(appointment => appointment === id)
-  //     if (foundDay) {
-  //       if (updateUp) {
-  //         const updatedDay = {
-  //           ...state.days[day],
-  //           spots: state.days[day].spots -1
-  //         }
-  //         const updatedDays = {
-  //           ...state.days,
-  //           [day]: updatedDay
-  //         }
-  
-  //         return updatedDays
-  //       }
-
-  //       const updatedDay = {
-  //         ...state.days[day],
-  //         spots: state.days[day].spots +1
-  //       }
-  //       const updatedDays = {
-  //         ...state.days,
-  //         [day]: updatedDay
-  //       }
-
-  //       return updatedDays
-  //     }
-  //   }
-  // }
-
-  function updateSpots(requestType) {
+  function updateSpots(appointments, state) {
     const dayIndex = state.days.findIndex(day => day.name === state.day)
+    const day = state.days[dayIndex];
+    let spots = 0;
 
-    const days = state.days
-
-    if (requestType === 'create') {
-      days[dayIndex].spots -= 1
-    } else {
-      days[dayIndex].spots += 1
+    for (const id of day.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        spots++;
+      }
     }
-    return days
+    const newDay = {...day, spots}
+    const newDays = state.days.map(d => d.name === state.day ? newDay : d)
+    // console.log(newDays)
+    return newDays
   }
 
 
@@ -62,14 +35,11 @@ function useApplicationData() {
       ...state.appointments[id],
       interview: { ...interview }
     };
-    
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-
-
-    const days = updateSpots('create')
+    const days = updateSpots(appointments, state)
 
     const newState = {
       ...state,
@@ -94,7 +64,7 @@ function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
-    const days = updateSpots()
+    const days = updateSpots(appointments, state)
 
     const newState = {
       ...state,
