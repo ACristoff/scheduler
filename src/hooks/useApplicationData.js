@@ -23,8 +23,8 @@ function useApplicationData() {
         spots++;
       }
     }
-    const newDay = {...day, spots}
-    const newDays = state.days.map(d => d.name === state.day ? newDay : d)
+    // const newDay = {...day, spots}
+    const newDays = state.days.map(d => d.name === state.day ? {...day, spots} : d)
     // console.log(newDays)
     return newDays
   }
