@@ -1,5 +1,4 @@
-// import InterviewerListItem from "components/InterviewerListItem";
-
+//transforms data in order to grab the appointments for the day
 export function getAppointmentsForDay(state, day) {
   const resultsArr = []
 
@@ -22,7 +21,7 @@ export function getAppointmentsForDay(state, day) {
 }
 
 
-
+//transforms data in order to grab all the interviewers for day. This one is different because I wanted to test 2 different methods for solving this problem.
 export function getInterviewersForDay(state, day) {
   // const resultsArr = [];
 
@@ -37,13 +36,12 @@ export function getInterviewersForDay(state, day) {
 
   // return resultsArr; 
 
-  //preferred react method, the above is commented so I know what I'm doing
+  //preferred react method, the above is commented so I can compare
   return foundDay.interviewers.map(id => state.interviewers[id])
 }
 
+//transforms data to grab a specific interview
 export function getInterview(state, interview) {
-
-
   if (!interview) {
     return null
   }
@@ -52,13 +50,5 @@ export function getInterview(state, interview) {
   const interviewer = state.interviewers[id]
 
   return {...interview, interviewer}
-
-  // resultObj.student = interview.student
-  // resultObj.interviewer = {}
-  // resultObj.interviewer.id = interview.interviewer
-  // resultObj.interviewer.name = state.interviewers[interview.interviewer].name
-  // resultObj.interviewer.avatar = state.interviewers[interview.interviewer].avatar
-
-  // return resultObj;
 }
 

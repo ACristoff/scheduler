@@ -1,8 +1,11 @@
 import { useState, useEffect  } from "react";
 import axios from 'axios';
 
+
+//this function manages state and my axios requests
 function useApplicationData() {
 
+  //the container for all my relevant states
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -10,8 +13,10 @@ function useApplicationData() {
     interviewers: {}
   });
 
+  //sets the default day
   const setDay = day => setState({ ...state, day });
 
+  //algorithm for updating spots whenever a succesful put or delete request is made
   function updateSpots(appointments, state) {
     const dayIndex = state.days.findIndex(day => day.name === state.day)
     const day = state.days[dayIndex];
@@ -23,13 +28,12 @@ function useApplicationData() {
         spots++;
       }
     }
-    // const newDay = {...day, spots}
+
     const newDays = state.days.map(d => d.name === state.day ? {...day, spots} : d)
-    // console.log(newDays)
     return newDays
   }
 
-
+  //posts an interview request after building a new state for submission, then sets the state to match
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -55,6 +59,7 @@ function useApplicationData() {
     })
   }  
 
+  //deletes an interview request after building a new state for submission, then sets the state to match
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -80,6 +85,7 @@ function useApplicationData() {
     })
   }
 
+  //updates the state to match when any other effect is made
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -90,6 +96,7 @@ function useApplicationData() {
     });
   }, [])
 
+  //returns the state and functions to whichever components require it
   return { state, setDay, bookInterview, cancelInterview}
 }
 

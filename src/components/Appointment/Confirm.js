@@ -14,9 +14,3 @@ function Confirm(props) {
 }
 
 export default Confirm;
-
-
-// The Confirm component should accept the following props:
-//     message:String eg. "Delete the appointment?"
-//     onConfirm:Function to be called when the user clicks the Confirm button
-//     onCancel:Function to be called when the user clicks the Cancel button
