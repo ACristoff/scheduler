@@ -1,12 +1,7 @@
 import React from "react";
 import DayListItem from "./DayListItem";
 
-
-// function selectedDay(dayListed, currentDay) {
-//   if (dayListed === currentDay) return true; 
-//   return false;
-// }
-
+//the day list container for our days on the sidebar
 export default function DayList(props) {
   const { days } = props;
 

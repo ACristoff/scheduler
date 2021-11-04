@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'components/Button';
 
+//the confirm card for appointments
 function Confirm(props) {
   return (
     <main className="appointment__card appointment__card--confirm">

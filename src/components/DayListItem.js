@@ -2,10 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import "components/DayListItem.scss";
 
-
-// day-list__item all the time
-// day-list__item--selected class name if props.selected is true
-// day-list__item--full class name if props.spots is 0.
+//manages the text for the spots left in the sidebar
 function formatSpots(spotsLeft) {
     if (spotsLeft === 0) {
       return 'no spots remaining'
@@ -16,11 +13,8 @@ function formatSpots(spotsLeft) {
     }
 }
 
+//formats each specific day in the sidebar
 export default function DayListItem(props) {
-  // let full = false;
-  // if (props.spots === 0) {
-  //   full = true;
-  // }
   const dayListItemClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full" : props.spots === 0

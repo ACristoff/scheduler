@@ -2,30 +2,32 @@ import React, { useState }from 'react';
 import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
 
-
+//the form card for appointments
 function Form(props) {
 
+  //relevant states
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
-
+  //resets all states to blank
   function reset() {
     setStudent("");
     setInterviewer("");
     setError("")
   }
 
+  //calls reset then runs the prop callback
   function cancel() {
     reset();
     props.onCancel();
   }
+  //validates for student name and then runs onSave, can be further modified to also take over cancel by using the callback parameter, could also be used to validate for interviewer selection
   function validate(name, callback) {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
-    }
-    
+    }  
     setError("")
     props.onSave(name, interviewer);
   }
@@ -41,10 +43,6 @@ function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={student}
-            /*
-              This must be a controlled component
-              your code goes here
-            */
             onChange={(event) => setStudent(event.target.value)}
             data-testid="student-name-input"
           />
@@ -66,42 +64,4 @@ function Form(props) {
   )
 }
 
-// <input
-//   className="appointment__create-input text--semi-bold"
-//   name="name"
-//   type="text"
-//   placeholder="Enter Student Name"
-//   value={name}
-//   onChange={event => {
-//     setName(event.target.value);
-//   }}
-//   data-testid="student-name-input"
-// />
-
-
-
 export default Form;
-
-
-// As part of our Edit story, the Form component should take the following props:
-
-//     student:String
-//     interviewer:Number
-//     interviewers:Array
-//     onSave:Function
-//     onCancel:Function
-
-// As part of our Create story, the Form component should take the following props:
-
-//     interviewers:Array
-//     onSave:Function
-//     onCancel:Function
-
-// Add the stories for Create and Edit and chain them to our previous Appointment stories.
-
-// In the Edit story, for the student and interviewer values, you may hard-code your own name and put a number between 0 - 4 for the ID. This is mock data that simulates editing a form that already contains information.
-
-
-
-
-

@@ -1,15 +1,13 @@
 import React from "react";
-// import axios from 'axios';
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-// import InterviewerListItem from "./InterviewerListItem";
 import useApplicationData from "hooks/useApplicationData";
 
-
-
+//where the app lives
 export default function Application(props) {
+  //states and actions for our application data
   const {
     state,
     setDay,
@@ -17,9 +15,11 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
+  //our default appointments and interviewers
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
   
+  //generates an appointment card by mapping over the data
   const dailyAppointmentList = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -34,7 +34,6 @@ export default function Application(props) {
       />
     )
   })
-
 
   return (
     <main className="layout">

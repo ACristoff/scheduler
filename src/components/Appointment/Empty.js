@@ -1,7 +1,7 @@
 import React from 'react';
 
+//the empty card for appointments
 function Empty(props) {
-
   return (
     <main className="appointment__add">
       <img

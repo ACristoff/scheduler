@@ -1,5 +1,6 @@
 import React from 'react'
 
+//the header between each appointment
 function Header(props) {
   return (
     <header className="appointment__time">

@@ -9,7 +9,7 @@ import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
 
-
+//variables for every possible card in the appointment component
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -20,8 +20,10 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
+//the root for the appointment component
 function Appointment(props) {
 
+  //the save function
   function save(name, interviewer) {
     transition(SAVING);
 
@@ -30,7 +32,6 @@ function Appointment(props) {
       interviewer
     };
   
-    // console.log('interview is: ',interview)
     props.bookInterview(props.id, interview)
     .then(() => {
       transition(SHOW)
@@ -40,6 +41,7 @@ function Appointment(props) {
     })
   }
 
+  //the delete appointment
   function deleteAppointment(id) {
     transition(DELETING, true)
 
@@ -52,6 +54,7 @@ function Appointment(props) {
     })
   }
 
+  //default for each appointment, either a filled out appointment or empty
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
