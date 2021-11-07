@@ -22,13 +22,18 @@ function Form(props) {
     reset();
     props.onCancel();
   }
-  //validates for student name and then runs onSave, can be further modified to also take over cancel by using the callback parameter, could also be used to validate for interviewer selection
-  function validate(name, callback) {
+  //validates for student name and interviewer then runs onSave
+  function validate(name, selectedInterviewer) {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
+    }
+    if (!selectedInterviewer) {
+      setError("You must select an interviewer")
+      return;
     }  
     setError("")
+    console.log(name, selectedInterviewer)
     props.onSave(name, interviewer);
   }
   
@@ -57,7 +62,7 @@ function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={(event) => {validate(student)}}>Save</Button>
+          <Button confirm onClick={(event) => {validate(student, interviewer)}}>Save</Button>
         </section>
       </section>
     </main>
