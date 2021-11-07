@@ -13,6 +13,9 @@ Interview scheduler is a single page application running on React, allowing you 
 Install dependencies with `npm install`.
 Install the server API and its dependencies here: https://github.com/lighthouse-labs/scheduler-api
 
+## Startup
+In order to use this, follow the server API instructions and run it using `npm start`, then run the scheduler app using `npm start`.
+
 ## Running Webpack Development Server
 
 ```sh
