@@ -1,42 +1,23 @@
 //transforms data in order to grab the appointments for the day
 export function getAppointmentsForDay(state, day) {
-  const resultsArr = []
-
   const filteredDay = state.days.filter(daysObj => daysObj.name === day)
 
-  if (filteredDay[0] === undefined) {
+  if (!filteredDay[0]) {
     return [];
   }
 
-  for (const appointment of filteredDay[0].appointments) {
-    let resultObj = {};
-
-    resultObj.id = appointment;
-    resultObj.time = state.appointments[appointment].time;
-    resultObj.interview = state.appointments[appointment].interview;
-    resultsArr.push(resultObj)
-  }
-
-  return resultsArr
+  return filteredDay[0].appointments.map(appointment => state.appointments[appointment])
 }
 
 
-//transforms data in order to grab all the interviewers for day. This one is different because I wanted to test 2 different methods for solving this problem.
+//transforms data in order to grab all the interviewers for day.
 export function getInterviewersForDay(state, day) {
-  // const resultsArr = [];
 
   const foundDay = state.days.find(d => d.name === day) 
   if (!foundDay) {
     return [];
   }
-  // for (const id of foundDay.interviewers) {
-  //   const interviewer = state.interviewers[id]
-  //   resultsArr.push(interviewer)
-  // } 
 
-  // return resultsArr; 
-
-  //preferred react method, the above is commented so I can compare
   return foundDay.interviewers.map(id => state.interviewers[id])
 }
 
